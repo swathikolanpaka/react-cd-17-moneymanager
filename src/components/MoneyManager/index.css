@@ -1,0 +1,83 @@
+/* Write your CSS here */
+.bg-container {
+  height: 100vh;
+  padding: 20vh;
+}
+.profile-details {
+  background-image: url('https://assets.ccbp.in/frontend/react-js/money-manager/money-manager-bg.png');
+  background-size: cover;
+  padding: 10px;
+}
+.amt-details {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.bal {
+  background-color: #ecfccb;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+img {
+  height: 10vh;
+  width: 10vh;
+  margin-right: 5px;
+}
+
+.income {
+  background-color: #cffafe;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-width: 9px;
+  border-color: #06b6d4;
+}
+
+.expense {
+  background-color: #ede9fe;
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.transaction-details {
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7e858e;
+  padding: 10px;
+}
+.title {
+  margin-bottom: 10px;
+}
+.amt {
+  margin-bottom: 10px;
+}
+.type {
+  margin-bottom: 10px;
+}
+.transaction-history-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  margin-top: 10px;
+}
+.history-details {
+  border-radius: 10px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: #7e858e;
+
+  display: flex;
+  justify-content: space-evenly;
+  padding: 10px;
+}
+.p {
+  margin-right: 15px;
+}
