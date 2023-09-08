@@ -1,12 +1,26 @@
+import './index.css'
+
 const MoneyDetails = props => {
-  const {historyDetails} = props
-  const {Title, Amount, Type} = historyDetails
+  const {historyDetails, deleteHistoryDetails} = props
+  const {Title, Amount, Type, id} = historyDetails
+
+  const deleteDetails = () => {
+    deleteHistoryDetails(id)
+  }
 
   return (
     <li>
-      <p>{Title}</p>
-      <p>{Amount}</p>
-      <p>{Type}</p>
+      <div className="history">
+        <p>{Title}</p>
+        <p>{Amount}</p>
+        <p>{Type}</p>
+        <button type="button" data-testid="delete" onClick={deleteDetails}>
+          <img
+            src="https://assets.ccbp.in/frontend/react-js/money-manager/delete.png"
+            alt="delete"
+          />
+        </button>
+      </div>
     </li>
   )
 }

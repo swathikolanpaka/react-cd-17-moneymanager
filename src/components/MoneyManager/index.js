@@ -31,18 +31,15 @@ class MoneyManager extends Component {
   addHistoryDetails = event => {
     event.preventDefault()
 
-    const {Title, Amount, balanceAmt, selectOption} = this.state
-    console.log(selectOption)
-    if (selectOption === 'Income') {
-      this.setState(prevBal => ({
-        balanceAmt: prevBal.balanceAmt + 1000,
-      }))
-    }
+    const {Title, incomeAmt, expenseAmt, Amount, selectOption} = this.state
+    // console.log(selectOption)
 
     const newHistory = {id: uuidv4(), Title, Amount, selectOption}
 
     this.setState(prevHistory => ({
       historyDetails: [...prevHistory.historyDetails, newHistory],
+      Title: '',
+      Amount: '',
     }))
     console.log(newHistory)
   }
@@ -55,8 +52,17 @@ class MoneyManager extends Component {
     this.setState({Amount: event.target.value})
   }
 
-  selectOption = event => {
+  selectOptionType = event => {
     this.setState({selectOption: event.target.value})
+  }
+
+  deleteHistoryDetails = id => {
+    const {historyDetails} = this.state
+    const remainingHistory = historyDetails.filter(
+      eachHistory => eachHistory.id !== id,
+    )
+
+    this.setState({historyDetails: remainingHistory})
   }
 
   render() {
@@ -116,7 +122,7 @@ class MoneyManager extends Component {
         <div className="transaction-history-container">
           <div className="transaction-details">
             <h1>Add Transaction</h1>
-            <from onSubmit={this.addHistoryDetails}>
+            <form onSubmit={this.addHistoryDetails}>
               <div className="title">
                 <label htmlFor="title">TITLE</label>
                 <br />
@@ -142,9 +148,12 @@ class MoneyManager extends Component {
               <div className="type">
                 <label htmlFor="selectType">TYPE</label>
                 <br />
-                <select id="selectType" onChange={this.selectOption}>
+                <select id="selectType" onChange={this.selectOptionType}>
                   {transactionTypeOptions.map(eachOption => (
-                    <option value={eachOption.optionId}>
+                    <option
+                      key={eachOption.optionId}
+                      value={eachOption.optionId}
+                    >
                       {eachOption.displayText}
                     </option>
                   ))}
@@ -152,7 +161,7 @@ class MoneyManager extends Component {
               </div>
 
               <button type="submit">Add</button>
-            </from>
+            </form>
           </div>
 
           <div className="history-container">
