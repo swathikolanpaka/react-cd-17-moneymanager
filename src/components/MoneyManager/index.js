@@ -20,51 +20,44 @@ const transactionTypeOptions = [
 class MoneyManager extends Component {
   state = {
     historyDetails: [],
-    balanceAmt: 0,
+
     incomeAmt: 0,
     expenseAmt: 0,
     Title: '',
     Amount: '',
-    selectOption: '',
+    selectOption: 'INCOME',
   }
 
   addHistoryDetails = event => {
     event.preventDefault()
 
-    const {
+    const {Title, Amount, selectOption} = this.state
+
+    // const selectType =
+    const newHistory = {
+      id: uuidv4(),
       Title,
-
-      incomeAmt,
-      expenseAmt,
       Amount,
+      selectOptionType: selectOption === 'INCOME' ? 'Income' : 'Expenses',
       selectOption,
-    } = this.state
-    // console.log(selectOption)
-
-    const newHistory = {id: uuidv4(), Title, Amount, selectOption}
-
+    }
     console.log(newHistory)
-
+    console.log(newHistory.selectOptionType)
     if (selectOption === 'EXPENSES') {
       this.setState(prevExpBal => ({
-        expenseAmt: prevExpBal.expenseAmt + Amount,
+        expenseAmt: prevExpBal.expenseAmt + parseInt(Amount),
       }))
     } else {
       this.setState(prevIncomeBal => ({
-        incomeAmt: prevIncomeBal.incomeAmt + Amount,
+        incomeAmt: prevIncomeBal.incomeAmt + parseInt(Amount),
       }))
     }
-
-    this.setState({
-      balanceAmt: incomeAmt - expenseAmt,
-    })
 
     this.setState(prevHistory => ({
       historyDetails: [...prevHistory.historyDetails, newHistory],
       Title: '',
       Amount: '',
     }))
-    console.log(newHistory)
   }
 
   addTitle = event => {
@@ -91,12 +84,14 @@ class MoneyManager extends Component {
   render() {
     const {
       historyDetails,
-      balanceAmt,
+
       incomeAmt,
       expenseAmt,
       Title,
       Amount,
     } = this.state
+
+    const balanceAmt = incomeAmt - expenseAmt
 
     return (
       <div className="bg-container">

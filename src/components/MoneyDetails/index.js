@@ -2,7 +2,7 @@ import './index.css'
 
 const MoneyDetails = props => {
   const {historyDetails, deleteHistoryDetails} = props
-  const {Title, Amount, Type, id} = historyDetails
+  const {Title, Amount, selectOptionType, id} = historyDetails
 
   const deleteDetails = () => {
     deleteHistoryDetails(id)
@@ -13,7 +13,7 @@ const MoneyDetails = props => {
       <div className="history">
         <p>{Title}</p>
         <p>{Amount}</p>
-        <p>{Type}</p>
+        <p>{selectOptionType}</p>
         <button type="button" data-testid="delete" onClick={deleteDetails}>
           <img
             src="https://assets.ccbp.in/frontend/react-js/money-manager/delete.png"
