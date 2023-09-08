@@ -31,10 +31,33 @@ class MoneyManager extends Component {
   addHistoryDetails = event => {
     event.preventDefault()
 
-    const {Title, incomeAmt, expenseAmt, Amount, selectOption} = this.state
+    const {
+      Title,
+
+      incomeAmt,
+      expenseAmt,
+      Amount,
+      selectOption,
+    } = this.state
     // console.log(selectOption)
 
     const newHistory = {id: uuidv4(), Title, Amount, selectOption}
+
+    console.log(newHistory)
+
+    if (selectOption === 'EXPENSES') {
+      this.setState(prevExpBal => ({
+        expenseAmt: prevExpBal.expenseAmt + Amount,
+      }))
+    } else {
+      this.setState(prevIncomeBal => ({
+        incomeAmt: prevIncomeBal.incomeAmt + Amount,
+      }))
+    }
+
+    this.setState({
+      balanceAmt: incomeAmt - expenseAmt,
+    })
 
     this.setState(prevHistory => ({
       historyDetails: [...prevHistory.historyDetails, newHistory],
