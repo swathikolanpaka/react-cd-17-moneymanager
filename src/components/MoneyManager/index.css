@@ -75,6 +75,7 @@ img {
   border-color: #7e858e;
 
   display: flex;
+
   justify-content: space-evenly;
   padding: 10px;
 }

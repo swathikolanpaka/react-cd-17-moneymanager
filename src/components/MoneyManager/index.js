@@ -20,7 +20,6 @@ const transactionTypeOptions = [
 class MoneyManager extends Component {
   state = {
     historyDetails: [],
-
     incomeAmt: 0,
     expenseAmt: 0,
     Title: '',
@@ -41,8 +40,11 @@ class MoneyManager extends Component {
       selectOptionType: selectOption === 'INCOME' ? 'Income' : 'Expenses',
       selectOption,
     }
-    console.log(newHistory)
-    console.log(newHistory.selectOptionType)
+
+    // console.log(newHistory)
+
+    //  console.log(newHistory.selectOptionType)
+
     if (selectOption === 'EXPENSES') {
       this.setState(prevExpBal => ({
         expenseAmt: prevExpBal.expenseAmt + parseInt(Amount),
@@ -73,12 +75,33 @@ class MoneyManager extends Component {
   }
 
   deleteHistoryDetails = id => {
+    const {Amount} = this.state
+
     const {historyDetails} = this.state
     const remainingHistory = historyDetails.filter(
       eachHistory => eachHistory.id !== id,
     )
+    const deletedTransaction = historyDetails.filter(
+      eachHistory => eachHistory.id === id,
+    )
+
+    console.log(deletedTransaction)
+
+    //  if (deletedTransaction.selectOption === 'EXPENSES') {
+    //  this.setState(prevExpBal => ({
+    //   expenseAmt: parseInt(prevExpBal.expenseAmt) - parseInt(Amount),
+    // }))
+    // } else {
+    //  this.setState(prevIncomeBal => ({
+    //   incomeAmt: parseInt(prevIncomeBal.incomeAmt) - parseInt(Amount),
+    // }))
+    // }
 
     this.setState({historyDetails: remainingHistory})
+
+    console.log(historyDetails)
+
+    console.log(historyDetails)
   }
 
   render() {
@@ -189,14 +212,18 @@ class MoneyManager extends Component {
               <p className="p">Amount</p>
               <p className="p">Type</p>
             </div>
-            <ul className="history-details">
-              {historyDetails.map(eachHistoryDetails => (
-                <MoneyDetails
-                  historyDetails={eachHistoryDetails}
-                  key={eachHistoryDetails.id}
-                />
-              ))}
-            </ul>
+
+            <div>
+              <ul>
+                {historyDetails.map(eachHistoryDetails => (
+                  <MoneyDetails
+                    historyDetails={eachHistoryDetails}
+                    key={eachHistoryDetails.id}
+                    deleteHistoryDetails={this.deleteHistoryDetails}
+                  />
+                ))}
+              </ul>
+            </div>
           </div>
         </div>
       </div>
