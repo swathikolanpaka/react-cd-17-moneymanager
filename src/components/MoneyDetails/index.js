@@ -12,7 +12,7 @@ const MoneyDetails = props => {
     <li>
       <div className="history">
         <p>{Title}</p>
-        <p>{Amount}</p>
+        <p>Rs {Amount}</p>
         <p>{selectOptionType}</p>
         <button type="button" data-testid="delete" onClick={deleteDetails}>
           <img

@@ -60,6 +60,8 @@ class MoneyManager extends Component {
       Title: '',
       Amount: '',
     }))
+
+    // console.log(historyDetails)
   }
 
   addTitle = event => {
@@ -75,7 +77,10 @@ class MoneyManager extends Component {
   }
 
   deleteHistoryDetails = id => {
-    const {Amount} = this.state
+    const {Amount, incomeAmt, expenseAmt} = this.state
+
+    console.log(incomeAmt)
+    console.log(expenseAmt)
 
     const {historyDetails} = this.state
     const remainingHistory = historyDetails.filter(
@@ -87,21 +92,19 @@ class MoneyManager extends Component {
 
     console.log(deletedTransaction)
 
-    //  if (deletedTransaction.selectOption === 'EXPENSES') {
-    //  this.setState(prevExpBal => ({
-    //   expenseAmt: parseInt(prevExpBal.expenseAmt) - parseInt(Amount),
-    // }))
-    // } else {
-    //  this.setState(prevIncomeBal => ({
-    //   incomeAmt: parseInt(prevIncomeBal.incomeAmt) - parseInt(Amount),
-    // }))
-    // }
+    // const {selectOption} = deletedTransaction
+
+    if (deletedTransaction.selectOption === 'EXPENSES') {
+      this.setState(prevExpBal => ({
+        expenseAmt: prevExpBal.expenseAmt - Amount,
+      }))
+    } else {
+      this.setState(prevIncomeBal => ({
+        incomeAmt: prevIncomeBal.incomeAmt - Amount,
+      }))
+    }
 
     this.setState({historyDetails: remainingHistory})
-
-    console.log(historyDetails)
-
-    console.log(historyDetails)
   }
 
   render() {
@@ -115,6 +118,7 @@ class MoneyManager extends Component {
     } = this.state
 
     const balanceAmt = incomeAmt - expenseAmt
+    // console.log(historyDetails)
 
     return (
       <div className="bg-container">
