@@ -79,30 +79,17 @@ class MoneyManager extends Component {
   deleteHistoryDetails = id => {
     const {Amount, incomeAmt, expenseAmt} = this.state
 
-    console.log(incomeAmt)
-    console.log(expenseAmt)
-
     const {historyDetails} = this.state
     const remainingHistory = historyDetails.filter(
       eachHistory => eachHistory.id !== id,
     )
-    const deletedTransaction = historyDetails.filter(
-      eachHistory => eachHistory.id === id,
-    )
 
-    console.log(deletedTransaction)
-
-    // const {selectOption} = deletedTransaction
-
-    if (deletedTransaction.selectOption === 'EXPENSES') {
-      this.setState(prevExpBal => ({
-        expenseAmt: prevExpBal.expenseAmt - Amount,
-      }))
-    } else {
-      this.setState(prevIncomeBal => ({
-        incomeAmt: prevIncomeBal.incomeAmt - Amount,
-      }))
-    }
+    this.setState(prevExpBal => ({
+      expenseAmt: prevExpBal.expenseAmt - Amount,
+    }))
+    this.setState(prevIncomeBal => ({
+      incomeAmt: prevIncomeBal.incomeAmt - Amount,
+    }))
 
     this.setState({historyDetails: remainingHistory})
   }
