@@ -79,16 +79,16 @@ class MoneyManager extends Component {
   deleteHistoryDetails = id => {
     const {Amount, incomeAmt, expenseAmt} = this.state
 
+    console.log(Amount)
+    console.log(incomeAmt)
+
     const {historyDetails} = this.state
     const remainingHistory = historyDetails.filter(
       eachHistory => eachHistory.id !== id,
     )
 
     this.setState(prevExpBal => ({
-      expenseAmt: prevExpBal.expenseAmt - Amount,
-    }))
-    this.setState(prevIncomeBal => ({
-      incomeAmt: prevIncomeBal.incomeAmt - Amount,
+      expenseAmt: prevExpBal.expenseAmt - parseInt(expenseAmt),
     }))
 
     this.setState({historyDetails: remainingHistory})
